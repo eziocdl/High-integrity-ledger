@@ -22,11 +22,13 @@ services:
     ports:
       - "4566:4566"
     environment:
-      - SERVICES=s3,sqs
+      - SERVICES=s3,sqs,secretsmanager
       - DEBUG=1
+      - AWS_DEFAULT_REGION=us-east-1
     volumes:
       - "./localstack_data:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./src/test/resources/localstack:/etc/localstack/init/ready.d"
 
 volumes:
   postgres_data:

@@ -1,45 +1,44 @@
 package com.ezio.ledger.domain.model;
 
-import java.util.Objects;
+import lombok.Getter;
 import java.util.UUID;
 
+// ✅ ZERO Frameworks (Sem JPA, sem Hibernate, apenas Java puro)
+@Getter
 public class Account {
 
-  private final UUID id;
-  private Money balance;
+    private final UUID id;
+    private Money balance;
+    private Long version;
 
-  public Account(UUID id) {
-    this.id = Objects.requireNonNull(id, "Account ID must not be null");
-    this.balance = Money.zero();
-  }
 
-  public void credit(Money amount) {
-    Objects.requireNonNull(amount, "Credit amount must not be null");
-    if (amount.isNegative()) {
-      throw new IllegalArgumentException("Credit amount must be positive");
+    public Account(UUID id) {
+        this.id = id;
+        this.balance = Money.zero("BRL");
     }
 
-    this.balance = this.balance.add(amount);
-  }
 
-  public void debit(Money amount) {
-    Objects.requireNonNull(amount, "Debit amount must not be null");
-    if (amount.isNegative()) {
-      throw new IllegalArgumentException("Debit amount must be positive");
+    private Account(UUID id, Money balance, Long version) {
+        this.id = id;
+        this.balance = balance;
+        this.version = version;
     }
 
-    if (amount.isGreaterThan(this.balance)) {
-      throw new IllegalArgumentException("Insufficient funds for debit");
+    // Factory Method: O Gateway usa isso para "hidratar" o objeto sem acionar regras de negócio (como criar conta com saldo zero)
+    public static Account reconstitute(UUID id, Money balance, Long version) {
+        return new Account(id, balance, version);
     }
 
-    this.balance = this.balance.subtract(amount);
-  }
 
-  public Money getBalance() {
-    return balance;
-  }
 
-  public UUID getId() {
-    return id;
-  }
+    public void credit(Money amount) {
+        this.balance = this.balance.add(amount);
+    }
+
+    public void debit(Money amount) {
+        if (!this.balance.isGreaterThanOrEqualTo(amount)) {
+            throw new IllegalArgumentException("Insufficient funds");
+        }
+        this.balance = this.balance.subtract(amount);
+    }
 }
