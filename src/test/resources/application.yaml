@@ -1,29 +1,28 @@
 spring:
   application:
-    name: high-integrity-ledger-test
-
+    name: high-integrity-ledger-test-suite
   cloud:
     aws:
       secretsmanager:
         enabled: false
+
   config:
     import: []
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/ledger_db
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/ledger_db_test
     username: admin
     password: secret
-    driver-class-name: org.postgresql.Driver
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop
     properties:
       hibernate:
+        show_sql: true
         format_sql: true
 
   flyway:
-    enabled: true
-    locations: filesystem:src/main/resources/db/migration
-    baseline-on-migrate: true
+    enabled: false

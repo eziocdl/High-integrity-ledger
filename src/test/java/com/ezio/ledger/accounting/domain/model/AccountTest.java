@@ -1,7 +1,8 @@
-package com.ezio.ledger.domain.model;
+package com.ezio.ledger.accounting.domain.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.ezio.ledger.shared.domain.Money;
 import java.math.BigDecimal;
 import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;

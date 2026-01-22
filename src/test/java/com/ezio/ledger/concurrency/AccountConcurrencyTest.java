@@ -1,14 +1,16 @@
 package com.ezio.ledger.concurrency;
 
-import com.ezio.ledger.domain.gateway.AccountRepository;
-import com.ezio.ledger.domain.model.Account;
-import com.ezio.ledger.domain.model.Money;
+import com.ezio.ledger.accounting.domain.gateway.AccountRepository;
+import com.ezio.ledger.accounting.domain.model.Account;
+import com.ezio.ledger.shared.domain.Money;
+import com.ezio.ledger.shared.infra.TestContainerConfig;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.sql.DataSource;
@@ -19,6 +21,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @SpringBootTest
+@Import(TestContainerConfig.class)
 public class AccountConcurrencyTest {
 
     @Autowired

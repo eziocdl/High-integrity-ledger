@@ -1,4 +1,4 @@
-package com.ezio.ledger.domain.model;
+package com.ezio.ledger.shared.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

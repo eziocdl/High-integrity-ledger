@@ -1,9 +1,10 @@
-package com.ezio.ledger.domain.model;
+package com.ezio.ledger.accounting.domain.model;
 
+import com.ezio.ledger.shared.domain.Money;
 import lombok.Getter;
 import java.util.UUID;
 
-// ✅ ZERO Frameworks (Sem JPA, sem Hibernate, apenas Java puro)
+
 @Getter
 public class Account {
 

@@ -1,8 +1,8 @@
 package com.ezio.ledger.accounting.infra.persistence;
 
-import com.ezio.ledger.domain.gateway.AccountRepository;
-import com.ezio.ledger.domain.model.Account;
-import com.ezio.ledger.domain.model.Money;
+import com.ezio.ledger.accounting.domain.gateway.AccountRepository;
+import com.ezio.ledger.accounting.domain.model.Account;
+import com.ezio.ledger.shared.domain.Money;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
-package com.ezio.ledger.domain.gateway;
+package com.ezio.ledger.accounting.domain.gateway;
 
-import com.ezio.ledger.domain.model.Account;
+import com.ezio.ledger.accounting.domain.model.Account;
 import java.util.Optional;
 import java.util.UUID;
 
